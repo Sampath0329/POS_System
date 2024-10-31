@@ -94,6 +94,7 @@ $('#customer-table-body').on('click','tr',function () {
 
 });
 
+// customer search Function
 $('#btn_customer_search').on('click', function () {
     let customer_id = $('#customerId').val();
     // console.log(customer_id);
@@ -170,4 +171,8 @@ $('#btn_customer_delete').on('click', function () {
         }
     });
 
+});
+
+$('.btn_clear').on('click', function () {
+    customer_form_clean();
 })

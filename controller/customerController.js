@@ -123,22 +123,22 @@ $('#btn_customer_search').on('click', function () {
     });
 });
 
+// customer Update function
 $('#btn_customer_update').on('click', function () {
     let id = $('#customerId').val();
 
-
-    customerArray.map((item,number)=>{
-       if (id === customerArray[number].c_id){
-           // console.log(item)
-           item.f_name = $('#customerFirstName').val();
-           item.l_name = $('#customerLastName').val();
-           item.address = $('#customerAddress').val();
-           item.contact = $('#customerContact').val();
-           item.salary = $('#customerSalary').val();
-       }
-        loadCustomerTable();
-        customer_form_clean();
+    customerArray.forEach((item) => {
+        if (id === item.c_id) {
+            item.f_name = $('#customerFirstName').val();
+            item.l_name = $('#customerLastName').val();
+            item.address = $('#customerAddress').val();
+            item.contact = $('#customerContact').val();
+            item.salary = $('#customerSalary').val();
+        }
     });
+
+    loadCustomerTable();
+    customer_form_clean();
 });
 
 // delete Customer Function

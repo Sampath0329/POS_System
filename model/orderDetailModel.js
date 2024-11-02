@@ -1,12 +1,21 @@
-export default class OrderDetail {
-    constructor(o_id,i_id,name,price,qty) {
+export default class OrderDetailModel {
+    constructor(o_id,c_id,i_id,name,qty,total) {
         this._o_id = o_id;
+        this._c_id = c_id;
         this._i_id = i_id;
         this._name = name;
-        this._price = price;
         this._qty = qty;
+        this._total = total;
     }
 
+
+    get total() {
+        return this._total;
+    }
+
+    set total(value) {
+        this._total = value;
+    }
 
     get o_id() {
         return this._o_id;
@@ -14,6 +23,14 @@ export default class OrderDetail {
 
     set o_id(value) {
         this._o_id = value;
+    }
+
+    get c_id() {
+        return this._c_id;
+    }
+
+    set c_id(value) {
+        this._c_id = value;
     }
 
     get i_id() {
@@ -32,14 +49,6 @@ export default class OrderDetail {
         this._name = value;
     }
 
-    get price() {
-        return this._price;
-    }
-
-    set price(value) {
-        this._price = value;
-    }
-
     get qty() {
         return this._qty;
     }
@@ -47,4 +56,5 @@ export default class OrderDetail {
     set qty(value) {
         this._qty = value;
     }
+
 }

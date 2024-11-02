@@ -1,6 +1,7 @@
 import OrderModel from "../model/orderModel.js";
 import CartTm from "../tm/cartTm.js";
-import {customerArray, itemArray, orderArray, orderDetail,cartArray} from "../db/database.js";
+import OrderDetailModel from "../model/orderDetailModel.js";
+import {customerArray, itemArray, orderArray, orderDetailArray,cartArray} from "../db/database.js";
 
 const selectCustomer = document.getElementById("select_customer_id");
 const selectItem = document.getElementById("item_select_id");
@@ -198,17 +199,50 @@ $('#btn_placeOrder').on('click', function () {
         customerId,
         netTotal
     ));
+
+    // order details save
+    orderDetailSave();
+
     // console.log(orderArray)
-    updateOrderId();
     // delete cartArray all value
     cartArray.length=0;
     // renew netTotal vale & update
     netTotal = 0;
     $('#payment').val(netTotal);
     // set disable value
+    disableValue();
     loadCustomerIdSelector();
+    clearInvoiceDetailsForm();
     loadCartTable();
     clearItemForm();
-    disableValue();
 
 });
+
+// order details save
+function orderDetailSave() {
+
+    let orderId = $('#orderId').val();
+    let customerId = $("#select_customer_id>option:selected").val();
+    cartArray.forEach((item,number)=>{
+        orderDetailArray.push(
+            new OrderDetailModel(
+                orderId,
+                customerId,
+                item.i_id,
+                item.name,
+                item.qty,
+                item.total
+            )
+        )
+    });
+    console.log(orderDetailArray)
+
+}
+
+function clearInvoiceDetailsForm() {
+    loadCustomerIdSelector();
+    updateOrderId();
+    $('#name').val('');
+    $('#address').val('');
+    $('#contact').val('');
+}

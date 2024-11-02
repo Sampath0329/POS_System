@@ -58,32 +58,6 @@ export function loadCustomerIdSelector() {
     });
 }
 
-
-// place order function
-$('#btn_placeOrder').on('click', function () {
-    let selectedOption = $("#select_customer_id>option:selected");
-    let value = selectedOption.val(); // Get its value
-    // console.log(value);
-    // orderArray.push(new OrderModel(
-    //     1,
-    //     "",
-    //     ""
-    // ))
-    updateOrderId();
-    // delete cartArray all value
-    cartArray.length=0;
-    // renew netTotal vale & update
-    netTotal = 0;
-    $('#payment').val(netTotal);
-    // set disable value
-    disableValue();
-    loadCartTable();
-    clearItemForm();
-    disableValue();
-
-});
-
-
 // set the name / address / contact in text field Invoice details
 $('#select_customer_id').on('change', function () {
     let selectedCustomerId = $("#select_customer_id>option:selected").val();
@@ -115,15 +89,16 @@ $('#item_select_id').on('change', function () {
 // order id auto generate
 let new_order_id;
 export function updateOrderId() {
+    // console.log(orderArray.length)
     if (orderArray.length === 0) {
         new_order_id = 1;
     } else {
-        new_order_id = orderArray.at(-1).o_id + 1;
-        // console.log(new_order_id)
+        new_order_id = parseInt(orderArray.at(-1).o_id) + 1; // Increment directly here
+        // console.log(new_order_id);
     }
-    // $('#orderId').attr('placeholder', new_order_id);
     $('#orderId').val(new_order_id);
 }
+
 
 //  add to cart function
 $('#btn_add_to_cart').on('click', function () {
@@ -144,7 +119,7 @@ $('#btn_add_to_cart').on('click', function () {
        (price*orderQty)
    );
    cartArray.push(cartTm);
-   console.log(cartArray);
+   // console.log(cartArray);
 
    // update Payment field
     $('#payment').val(netTotal);
@@ -209,3 +184,31 @@ function clearItemForm() {
     $('#price').val("");
     $('#qty').val("");
 }
+
+// place order function
+$('#btn_placeOrder').on('click', function () {
+    let selectedOption = $("#select_customer_id>option:selected");
+    let customerId = selectedOption.val(); // Get its value
+    // console.log(value);
+
+    let orderId = $('#orderId').val();
+
+    orderArray.push(new OrderModel(
+        orderId,
+        customerId,
+        netTotal
+    ));
+    // console.log(orderArray)
+    updateOrderId();
+    // delete cartArray all value
+    cartArray.length=0;
+    // renew netTotal vale & update
+    netTotal = 0;
+    $('#payment').val(netTotal);
+    // set disable value
+    loadCustomerIdSelector();
+    loadCartTable();
+    clearItemForm();
+    disableValue();
+
+});

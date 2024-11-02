@@ -2,9 +2,31 @@ import {itemArray} from "../db/database.js";
 import ItemModel from "../model/itemModel.js";
 
 
+itemArray.push(new ItemModel(
+    1,
+    "Rice",
+    "kakulu",
+    "200",
+    20
+));
+itemArray.push(new ItemModel(
+    2,
+    "Rice",
+    "Samba",
+    "350",
+    50
+));
+itemArray.push(new ItemModel(
+    3,
+    "Rice",
+    "KeeriSamba",
+    "800",
+    100
+))
+
 // item id auto generate
 let item_id;
-setInterval(() => {
+export function updateItemId() {
     if (itemArray.length ===0){
         item_id = 1;
         $('#newItemId').attr('placeholder',item_id);
@@ -12,7 +34,7 @@ setInterval(() => {
         item_id = itemArray.at(-1).i_id+1;
         $('#newItemId').attr('placeholder',item_id);
     }
-}, 100);
+}
 
 
 
@@ -35,6 +57,7 @@ $('#btn_save_item').on('click', function () {
     itemArray.push(new_item);
     loadItemTable();
     item_form_clean();
+    updateItemId();
 
 });
 
@@ -62,7 +85,7 @@ const loadItemTable = () => {
     } else {
         $("#item-table-body").empty();
     }
-};
+}
 
 //  table click function
 $('#item-table-body').on('click','tr',function () {
@@ -183,6 +206,7 @@ $('#btn_item_delete').on('click', function () {
                     itemArray.splice(number,1);
                     item_form_clean();
                     loadItemTable();
+                    updateItemId();
                 }
             });
         }

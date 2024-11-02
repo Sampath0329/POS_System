@@ -2,6 +2,16 @@ import CustomerModel from "../model/customerModel.js";
 import {customerArray} from "../db/database.js";
 
 
+let customer = new CustomerModel(
+    "200208901748",
+    "Nadish",
+    "Sampath",
+    "Galle",
+    "0769446692",
+    "200000"
+);
+customerArray.push(customer);
+
 // Add new Customer Function
 $('#btn_save_customer').on('click', function () {
     let customer_id = $('#newCustomerId').val();

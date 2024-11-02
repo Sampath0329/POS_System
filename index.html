@@ -102,7 +102,7 @@
                             <form id="addCustomerForm">
                                 <div class="mb-3">
                                     <label for="newCustomerId" class="form-label">Customer ID</label>
-                                    <input type="text" class="form-control" id="newCustomerId" placeholder="Enter Customer ID">
+                                    <input type="text" class="form-control" id="newCustomerId" placeholder="Enter Customer NIC">
                                 </div>
                                 <div class="mb-3">
                                     <label for="newCustomerFirstName" class="form-label">First Name</label>
@@ -314,26 +314,26 @@
                 <div class="card-header">Invoice Details</div>
                 <div class="card-body">
                     <div class="mb-3">
-                        <label for="orderID" class="form-label">Order ID:</label>
-                        <input type="text" class="form-control" id="orderID">
+                        <label for="orderId" class="form-label">Order ID:</label>
+                        <input type="text" class="form-control" id="orderId" disabled>
                     </div>
                     <div class="mb-3">
-                        <label for="customer" class="form-label">Customer ID:</label>
-                        <select class="form-select" id="customer">
-                            <option value="C003" selected></option>
+                        <label for="select_customer_id" class="form-label">Customer ID:</label>
+                        <select class="form-select" id="select_customer_id">
+                            <option id="select_option"></option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="name" class="form-label">Name:</label>
-                        <input type="text" class="form-control" id="name">
+                        <input type="text" class="form-control" id="name" disabled>
                     </div>
                     <div class="mb-3">
                         <label for="address" class="form-label">Address:</label>
-                        <input type="text" class="form-control" id="address" >
+                        <input type="text" class="form-control" id="address" disabled>
                     </div>
                     <div class="mb-3">
-                        <label for="salary" class="form-label">Salary:</label>
-                        <input type="text" class="form-control" id="salary">
+                        <label for="contact" class="form-label">Contact:</label>
+                        <input type="text" class="form-control" id="contact" disabled>
                     </div>
                 </div>
             </div>
@@ -345,28 +345,28 @@
                 <div class="card-header">Item Select</div>
                 <div class="card-body">
                     <div class="mb-3">
-                        <label for="item" class="form-label">Item ID:</label>
-                        <select class="form-select" id="item">
-                            <option value="P002" selected></option>
+                        <label for="item_select_id" class="form-label">Item ID:</label>
+                        <select class="form-select" id="item_select_id">
+                            <option></option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="orderItemName" class="form-label">Item Name:</label>
-                        <input type="text" class="form-control" id="orderItemName" >
+                        <input type="text" class="form-control" id="orderItemName" disabled>
                     </div>
                     <div class="mb-3">
                         <label for="price" class="form-label">Price:</label>
-                        <input type="text" class="form-control" id="price" >
+                        <input type="text" class="form-control" id="price" disabled>
                     </div>
                     <div class="mb-3">
                         <label for="qty" class="form-label">Qty On Hand:</label>
-                        <input type="text" class="form-control" id="qty" >
+                        <input type="text" class="form-control" id="qty" disabled>
                     </div>
                     <div class="mb-3">
                         <label for="orderQty" class="form-label">Order Quantity:</label>
-                        <input type="text" class="form-control" id="orderQty" >
+                        <input type="number" class="form-control" id="orderQty" >
                     </div>
-                    <button type="button" class="btn btn-primary m-2">Add</button>
+                    <button id="btn_add_to_cart" type="button" class="btn btn-primary m-2">Add</button>
                 </div>
             </div>
         </div>
@@ -374,12 +374,12 @@
         <!-- Total & Payment -->
         <div class="col-md-4">
             <div class="total-box border rounded p-3">
-                <h1>Total:</h1>
-                <h1>Sub Total:</h1>
+                <h1 class="p- 3 pb-5">Payment Details</h1>
+<!--                <h1>Sub Total:</h1>-->
 
                 <div class="mb-3">
                     <label for="cash" class="form-label">Cash:</label>
-                    <input type="text" class="form-control" id="cash" >
+                    <input type="number" class="form-control" id="cash" >
                 </div>
 
                 <div class="mb-3">
@@ -388,11 +388,16 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="balance" class="form-label">Balance:</label>
-                    <input type="text" class="form-control" id="balance" >
+                    <label for="payment" class="form-label">payment:</label>
+                    <input type="number" class="form-control" id="payment" disabled>
                 </div>
 
-                <button type="button" class="btn btn-primary m-2">PlaceOrder</button>
+                <div class="mb-3">
+                    <label for="balance" class="form-label">Balance:</label>
+                    <input type="number" class="form-control" id="balance" disabled>
+                </div>
+
+                <button id="btn_placeOrder" type="button" class="btn btn-primary m-2">PlaceOrder</button>
             </div>
         </div>
     </div>
@@ -407,58 +412,22 @@
                         <table class="table table-bordered border-primary table-cart">
                             <thead>
                             <tr>
-                                <th scope="col">Item Name </th>
-                                <th scope="col">Description</th>
+                                <th scope="col">Item id </th>
+                                <th scope="col">Name</th>
                                 <th scope="col">Unit Price</th>
                                 <th scope="col">Quantity</th>
                                 <th scope="col">Total</t></th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="cart-table-body">
 
-                            <tr>
-                                <td>1</td>
-                                <td>Toy</td>
-                                <td>Rs.250</td>
-                                <td>2</td>
-                                <td>Rs.500</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>d1</td>
-                                <td>u1</td>
-                                <td>q1</td>
-                                <td>t1</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>d1</td>
-                                <td>u1</td>
-                                <td>q1</td>
-                                <td>t1</td>
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>d1</td>
-                                <td>u1</td>
-                                <td>q1</td>
-                                <td>t1</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>d1</td>
-                                <td>u1</td>
-                                <td>q1</td>
-                                <td>t1</td>
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>d1</td>
-                                <td>u1</td>
-                                <td>q1</td>
-                                <td>t1</td>
-                            </tr>
-
+<!--                            <tr>-->
+<!--                                <td>1</td>-->
+<!--                                <td>Toy</td>-->
+<!--                                <td>Rs.250</td>-->
+<!--                                <td>2</td>-->
+<!--                                <td>Rs.500</td>-->
+<!--                            </tr>-->
 
                             </tbody>
                         </table>
@@ -471,7 +440,15 @@
 
 <script src="lib/jquery-3.7.1.min.js"></script>
 
-<script>
+<script type="module" src="controller/customerController.js"></script>
+<script type="module" src="controller/itemController.js"></script>
+<script type="module" src="controller/orderController.js"></script>
+
+<script type="module">
+
+    import {updateOrderId} from "./controller/orderController.js";
+    import {updateItemId} from "./controller/itemController.js";
+    import {loadCustomerIdSelector,loadItemIdSelector,disableValue} from "./controller/orderController.js";
 
     // const now = new Date();
     // const year = now.getFullYear();
@@ -538,10 +515,16 @@
     });
 
     item_nav.addEventListener('click', function () {
+        updateItemId();
         showSection(item_section, item_nav);
     });
 
+
     order_nav.addEventListener('click', function () {
+        disableValue();
+        updateOrderId();
+        loadItemIdSelector()
+        loadCustomerIdSelector();
         showSection(order_section, order_nav);
     });
 
@@ -550,10 +533,15 @@
     });
 
     item_dashboard_nav.addEventListener('click', function () {
+        updateItemId();
         showSection(item_section, item_nav);
     });
 
     order_dashboard_nav.addEventListener('click', function () {
+        disableValue();
+        updateOrderId();
+        loadItemIdSelector()
+        loadCustomerIdSelector();
         showSection(order_section, order_nav);
     });
 
@@ -561,8 +549,7 @@
 
 
 </script>
-<script type="module" src="controller/customerController.js"></script>
-<script type="module" src="controller/itemController.js"></script>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
